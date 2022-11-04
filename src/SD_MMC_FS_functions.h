@@ -29,6 +29,7 @@ void listDir(fs::FS &fs, const char * dirname, uint8_t levels){
             Serial.print(file.name());
             Serial.print("  SIZE: ");
             Serial.println(file.size());
+
         }
         file = root.openNextFile();
     }

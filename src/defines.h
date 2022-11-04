@@ -2,6 +2,8 @@
 
 #define SCR_WIDTH   131 // display width
 #define SCR_HEIGHT  175 // display height
+#define SCR_COLUMS  15  // 8x8 text columns
+#define SCR_LINES   21  // 8x8 text lines
 #define SCR_COLOR   0x0000  // back screen color
 #define SCR_DOWN    167 //bottom of the screen. used in the game so as not to overwrite points and lives
 #define LEFT        0	// for LEFT
