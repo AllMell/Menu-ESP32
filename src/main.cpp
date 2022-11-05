@@ -6,8 +6,12 @@
 #include "ANALOG_BATTON.h"
 #include "DIGITAL_BATTON.h"
 #include "SD_MMC_FS_functions.h"
+#include "MESSAGE_LINE.h"
+
+MESSAGE_LINE messageLineTop;
 
 void setup(){
+    mode = START;
     pinMode(2, INPUT_PULLUP); //for SD CARD
     Serial.begin(115200);
     LCD_init();
@@ -43,14 +47,22 @@ void setup(){
         LCD_Puts_Shadow((char*)"UNKNOWN", 64, 0, GREEN, 0, 0, 0);
     }
 
-   
-    char char_buf[16];
     uint64_t cardSize = SD_MMC.cardSize() / (1024 * 1024);
     Serial.printf("\nSD_MMC Card Size: %lluMB\n", cardSize);
     LCD_Puts_Shadow((char*)"Size(Mb): ", 0, 8, GREEN, 0, 0, 0);
-    LCD_Puts_Shadow(ultoa(cardSize, char_buf, 10), 80, 8, GREEN, 0, 0, 0);
-    delay(1000);
+    LCD_Puts_Shadow(ultoa(cardSize, buffer, 10), 80, 8, GREEN, 0, 0, 0);
+    LCD_Puts_Shadow((char*)"Русский язык", 0, 16, GREEN, 0, 0, 0);
+    Serial.printf("Total space: %lluMB\n", SD_MMC.totalBytes() / (1024 * 1024));
+    Serial.printf("Used space: %lluMB\n", SD_MMC.usedBytes() / (1024 * 1024));
+    delay(3000);
     LCD_FillScreen(BLACK);
+    mode = MENU;
+    messageLineTop.Set(0);
+    messageLineTop.Show_text(1,GREEN,0);
+    delay(1000);
+    messageLineTop.Inverse();
+    delay(1000);
+    messageLineTop.Hide();
 }
 
 void loop() {

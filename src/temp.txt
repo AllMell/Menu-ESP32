@@ -20,32 +20,7 @@ void setup(){
     free(psdRamBuffer);
     logMemory();
 
-    if(!SD_MMC.begin("/sdcard",true)){
-        Serial.printf("Card Mount Failed");
-        return;
-    }
-    uint8_t cardType = SD_MMC.cardType();
-
-    if(cardType == CARD_NONE){
-        Serial.printf("No SD_MMC card attached");
-        return;
-    }
-
     
-
-    Serial.printf("SD_MMC Card Type: ");
-    if(cardType == CARD_MMC){
-        Serial.printf("MMC");
-    } else if(cardType == CARD_SD){
-        Serial.printf("SDSC");
-    } else if(cardType == CARD_SDHC){
-        Serial.printf("SDHC");
-    } else {
-        Serial.printf("UNKNOWN");
-    }
-
-    uint64_t cardSize = SD_MMC.cardSize() / (1024 * 1024);
-    Serial.printf("\nSD_MMC Card Size: %lluMB\n", cardSize);
 
     listDir(SD_MMC, "/", 0);
     createDir(SD_MMC, "/mydir");
