@@ -58,11 +58,12 @@ void setup(){
     LCD_FillScreen(BLACK);
     mode = MENU;
     messageLineTop.Set(0);
-    messageLineTop.Show_text(1,GREEN,0);
+    messageLineTop.Show_const_message(1,GREEN,0);
     delay(1000);
     messageLineTop.Inverse();
     delay(1000);
     messageLineTop.Hide();
+    messageLineTop.Show_text((char*)"test", RED, 1);
 }
 
 void loop() {
