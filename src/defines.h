@@ -57,6 +57,6 @@
 #define ON          1   // for ON
 #define OFF         0   // for OFF
 
-#define START   0
-#define MENU    1
+#define MODE_START   0
+#define MODE_MENU    1
 

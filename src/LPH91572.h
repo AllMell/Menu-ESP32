@@ -8,7 +8,8 @@
 //
 //-----------------------------------------------------------------
 
-#pragma once
+#ifndef __LPH91572_H__
+#define __LPH91572_H__
 
 // uncomment to use 8 bit colors
 //#define _8_BIT_COLOR
@@ -30,8 +31,13 @@
 
 //*************************************************************
 // command/data
+//*************************************************************
 #define CMD 0
 #define DAT 1
+
+#define SYMBOLS 0
+#define SPRITES 1
+#define SYMBOLS_BOLD 2
 
 #ifdef _8_BIT_COLOR
 //8 bit color samples (256 colors)
@@ -93,9 +99,12 @@
 
 #endif
 
+
+
 //*************************************************************
 //functions prototypes
-
+//*************************************************************
+void LCD_set_font(uint8_t _font);
 void LCD_init (void);
 void Send_to_lcd (uint8_t RS, uint8_t data);
 void SetArea (uint8_t x1, uint8_t x2, uint8_t y1, uint8_t y2);
@@ -116,3 +125,4 @@ void LCD_DrawRect_my (uint8_t x1, uint8_t y1, uint8_t width, uint8_t height, uin
 void LCD_FillRect (uint8_t x1, uint8_t y1, uint8_t width, uint8_t height, uint16_t color);
 #endif
 
+#endif

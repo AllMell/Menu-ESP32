@@ -1,7 +1,19 @@
 #include <Arduino.h>
 #include <SPI.h>
 #include "Symbols.h"
+#include "Symbols_bold.h"
+#include "Sprites.h"
 #include "LPH91572.h"
+
+uint8_t current_font = SYMBOLS;
+
+
+//===============================================================
+//                      set font V
+//===============================================================
+void LCD_set_font(uint8_t _font){
+  current_font = _font;
+}
 
 //===============================================================
 //                        init V
@@ -112,7 +124,18 @@ void Send_Symbol (char symbol, uint8_t x, uint8_t y, uint16_t t_color, uint16_t 
 
   for ( a = 0; a < 8; a++) //Перебираю 8 байт, составляющих символ
   {
-    temp_symbol = pgm_read_byte (&zx_font_8x8[symbol - 32][a]); //zx_font_8x8[symbol - 32][a];
+    switch(current_font){
+        case SYMBOLS:
+          temp_symbol = pgm_read_byte (&zx_font_8x8[symbol - 32][a]); //zx_font_8x8[symbol - 32][a];
+          break;
+        case SPRITES:
+          temp_symbol = pgm_read_byte (&sprites_8x8[symbol - 32][a]); //sprites_8x8[symbol - 32][a];
+          break;
+        case SYMBOLS_BOLD:
+          temp_symbol = pgm_read_byte (&zx_font_8x8_bold[symbol - 32][a]); //zx_font_8x8[symbol - 32][a];
+          break;
+    }
+    
     zw = 0;
     while (zw != zoom_width) //Вывод байта выполняется zw раз
     {
@@ -222,10 +245,12 @@ void LCD_Puts(char *str, uint8_t x, byte y,  uint16_t t_color, uint16_t b_color,
   {
     if ((str[i]==208)||(str[i]==209)) {
         if ((str[i]==208)&&(str[i+1]==129)){
-        str[i+1]=208;
+        LCD_Putchar(208, x + ((i - j) * 8 * zoom_width), y, t_color, b_color, zoom_width, zoom_height, rot);
+        i++;
       }
       if ((str[i]==209)&&(str[i+1]==145)){
-        str[i+1]=209;
+        LCD_Putchar(209, x + ((i - j) * 8 * zoom_width), y, t_color, b_color, zoom_width, zoom_height, rot);
+        i++;
       }
       j++;
       i++;
@@ -251,7 +276,17 @@ void Send_Symbol_Shadow (char symbol, uint8_t x, uint8_t y, uint16_t t_color, ui
   
   for ( a = 0; a < 8; a++) //Перебираю 8 байт, составляющих символ
   {
-    temp_symbol = pgm_read_byte (&zx_font_8x8[symbol - 32][a]); //temp_symbol = zx_font_8x8[symbol - 32][a];
+    switch(current_font){
+        case SYMBOLS:
+          temp_symbol = pgm_read_byte (&zx_font_8x8[symbol - 32][a]); //zx_font_8x8[symbol - 32][a];
+          break;
+        case SPRITES:
+          temp_symbol = pgm_read_byte (&sprites_8x8[symbol - 32][a]); //sprites_8x8[symbol - 32][a];
+          break;
+        case SYMBOLS_BOLD:
+          temp_symbol = pgm_read_byte (&zx_font_8x8_bold[symbol - 32][a]); //zx_font_8x8[symbol - 32][a];
+          break;
+    }
     zw = 0;
     while (zw != zoom_width) //Вывод байта выполняется zw раз
     {

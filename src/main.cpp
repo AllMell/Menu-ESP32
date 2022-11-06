@@ -7,11 +7,10 @@
 #include "DIGITAL_BATTON.h"
 #include "SD_MMC_FS_functions.h"
 #include "MESSAGE_LINE.h"
-
-MESSAGE_LINE messageLineTop;
+#include "MENU.h"
 
 void setup(){
-    mode = START;
+    mode = MODE_START;
     pinMode(2, INPUT_PULLUP); //for SD CARD
     Serial.begin(115200);
     LCD_init();
@@ -56,16 +55,9 @@ void setup(){
     Serial.printf("Used space: %lluMB\n", SD_MMC.usedBytes() / (1024 * 1024));
     delay(3000);
     LCD_FillScreen(BLACK);
-    mode = MENU;
-    messageLineTop.Set(0);
-    messageLineTop.Show_const_message(1,GREEN,0);
-    delay(1000);
-    messageLineTop.Inverse();
-    delay(1000);
-    messageLineTop.Hide();
-    messageLineTop.Show_text((char*)"test", RED, 1);
+    mode = MODE_MENU;
 }
 
 void loop() {
-  
+
 }
