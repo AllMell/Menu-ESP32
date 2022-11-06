@@ -4,12 +4,30 @@
 #define SCR_HEIGHT  175 // display height
 #define SCR_COLUMS  15  // 8x8 text columns
 #define SCR_LINES   21  // 8x8 text lines
-#define SCR_COLOR   0x0000  // back screen color
+//#define SCR_COLOR   0x0000  // back screen color
 #define SCR_DOWN    167 //bottom of the screen. used in the game so as not to overwrite points and lives
 #define LEFT        0	// for LEFT
 #define RIGHT       1	// for RIGHT
 #define UP          0	// for UP
-#define DOWN        1	// for DOWN
+#define DOWN        1	// for 
+
+#define COLOR_MENU_BOTTOM_PAPER           0xD6BA  //  ZX_WHITE
+#define COLOR_MENU_BOTTOM_INK             0x0000  //  ZX_BLACK
+#define COLOR_MENU_TOP_PAPER                0x0000  //  ZX_BLACK
+#define COLOR_MENU_TOP_INACTIVE_LINE_INK    0x0000  //  ZX_BLACK
+#define COLOR_MENU_TOP_ACTIVE_LINE_INK      0xFFFF  //  ZX_WHITE_BR
+#define COLOR_MENU_LINE_INK                 0x0000  //  ZX_BLACK
+#define COLOR_MENU_INACTIVE_LINE_PAPER      0xFFFF  //  ZX_WHITE
+#define COLOR_MENU_ACTIVE_LINE_PAPER        0x07FF  //  ZX_CYAN_BR
+#define COLOR_LOGO_0    0x0000  //  ZX_BLACK
+#define COLOR_LOGO_1    0xF800  //  ZX_RED_BR
+#define COLOR_LOGO_2    0xFFE0  //  ZX_YELLOW_BR
+#define COLOR_LOGO_3    0x07E0  //  ZX_GREEN_BR
+#define COLOR_LOGO_4    0x07FF  //  ZX_CYAN_BR
+
+#define LINE_TYPE_TOP       0
+#define LINE_TYPE_BOTTOM    1
+#define LINE_TYPE_MENU      2
 
 #define PIN_BAT     35  // pin for ADC read voltage from BAT
 #define PIN_BTN_A   25  // pin for btn left (pull up)
