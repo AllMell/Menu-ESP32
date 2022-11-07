@@ -1,7 +1,7 @@
 #include <Arduino.h>
+#include "LPH91572.h"
 #include "defines.h"
 #include "variables.h"
-#include "LPH91572.h"
 #include "ANALOG_STICK.h"
 #include "ANALOG_BATTON.h"
 #include "DIGITAL_BATTON.h"
@@ -14,6 +14,7 @@ void setup(){
     pinMode(2, INPUT_PULLUP); //for SD CARD
     Serial.begin(115200);
     LCD_init();
+    LCD_set_font(SYMBOLS);
     LCD_FillScreen(BLACK);
 
     if(!SD_MMC.begin("/sdcard",true)){
@@ -53,9 +54,37 @@ void setup(){
     LCD_Puts_Shadow((char*)"Русский язык", 0, 16, GREEN, 0, 0, 0);
     Serial.printf("Total space: %lluMB\n", SD_MMC.totalBytes() / (1024 * 1024));
     Serial.printf("Used space: %lluMB\n", SD_MMC.usedBytes() / (1024 * 1024));
-    delay(3000);
-    LCD_FillScreen(BLACK);
+    delay(2000);
+    LCD_FillScreen(ZX_WHITE);
     mode = MODE_MENU;
+
+    Serial.println("begin");
+    Serial.printf("Total heap : %dB\n", ESP.getHeapSize());
+    Serial.printf("Free heap  : %dB\n", ESP.getFreeHeap());
+    Serial.printf("Total PSRAM: %dB\n", ESP.getPsramSize());
+    Serial.printf("Free PSRAM : %dB\n", ESP.getFreePsram());
+
+
+    
+    Position_Struct *Current_position = (Position_Struct*)ps_malloc(sizeof(Position_Struct));
+    
+
+    Serial.println("begin");
+    Serial.printf("Total heap : %dB\n", ESP.getHeapSize());
+    Serial.printf("Free heap  : %dB\n", ESP.getFreeHeap());
+    Serial.printf("Total PSRAM: %dB\n", ESP.getPsramSize());
+    Serial.printf("Free PSRAM : %dB\n", ESP.getFreePsram());
+
+    
+MESSAGE_LINE test_message(1, 0, 5, GREEN, BLACK, SYMBOLS_BOLD);
+test_message.Show_const_message(1);
+delay(2000);
+test_message.Hide();
+delay(2000);
+//test_message.MESSAGE_LINE::~MESSAGE_LINE();
+test_message.~MESSAGE_LINE();
+
+
 }
 
 void loop() {

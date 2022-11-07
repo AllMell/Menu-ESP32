@@ -2,8 +2,8 @@
 
 #define SCR_WIDTH   131 // display width
 #define SCR_HEIGHT  175 // display height
-#define SCR_COLUMS  15  // 8x8 text columns
-#define SCR_LINES   21  // 8x8 text lines
+#define SCR_COLUMS  16  // 8x8 text columns
+#define SCR_LINES   22  // 8x8 text lines
 //#define SCR_COLOR   0x0000  // back screen color
 #define SCR_DOWN    167 //bottom of the screen. used in the game so as not to overwrite points and lives
 #define LEFT        0	// for LEFT
@@ -26,8 +26,10 @@
 #define COLOR_LOGO_4    0x07FF  //  ZX_CYAN_BR
 
 #define LINE_TYPE_TOP       0
-#define LINE_TYPE_BOTTOM    1
-#define LINE_TYPE_MENU      2
+#define LINE_TYPE_MENU      1
+#define LINE_TYPE_BOTTOM    2
+
+#define MENU_LINES_NUMBER 20
 
 #define PIN_BAT     35  // pin for ADC read voltage from BAT
 #define PIN_BTN_A   25  // pin for btn left (pull up)

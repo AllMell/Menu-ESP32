@@ -105,6 +105,7 @@
 //functions prototypes
 //*************************************************************
 void LCD_set_font(uint8_t _font);
+uint8_t LCD_get_font();
 void LCD_init (void);
 void Send_to_lcd (uint8_t RS, uint8_t data);
 void SetArea (uint8_t x1, uint8_t x2, uint8_t y1, uint8_t y2);

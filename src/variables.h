@@ -5,9 +5,9 @@ char file_name[16][22][2];
 
 char buffer[16];//for messages
 const char str_0[] = "                "; // 16 spaces
-const char str_1[] = "HELLOW!!!";
-const char str_2[] = "";
-const char str_3[] = "";
+const char str_1[] = "HELLOW!!!       ";
+const char str_2[] = "RESTART";
+const char str_3[] = "DELETE OBJ";
 const char str_4[] = "";
 const char str_5[] = "";
 const char str_6[] = "";
@@ -20,3 +20,20 @@ const char str_12[] = "";
 const char str_13[] = "";
 const char str_14[] = "";
 const char* const str_table[] = {str_0, str_1, str_2, str_3, str_4, str_5, str_6, str_7, str_8, str_9, str_10, str_11, str_12, str_13, str_14};
+
+struct Files_Struct{
+    char file_name[64];
+    char file_type[6];
+    uint16_t position_in_dir;   
+};
+
+struct Position_Struct{
+    uint8_t position_in_dir;
+    uint8_t position_on_page;
+    uint8_t current_page;
+    uint16_t patf_stack[64];
+    char patf[1024];
+};
+
+
+
