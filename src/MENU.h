@@ -14,8 +14,6 @@ class MENU{
             _menu_x = menu_x; _menu_width = menu_width; _menu_y = menu_y; _menu_height = menu_height; _font = font; _menu_color_ink = menu_color_ink; _menu_color_paper = menu_color_paper; _menu_color_select_paper = menu_color_select_paper;
         }
         
-        
-
         void Show_menu(){
             for (int i = _menu_y; i < _menu_height; i++) {
                 Show_line(i);
@@ -47,7 +45,6 @@ class MENU{
 
         void Show_select_line(){
                 Set_menu_font();
-                //LCD_Puts(Files_table->file_name, 8*_menu_x, 8*(_menu_y + Current_position->position_on_page), _menu_color_ink, _menu_color_select_paper, 1, 1, 0);
                 Serial.print("Menu select line show: ");Serial.println(Files_table->file_name);
                 Set_system_font();
         }
@@ -69,8 +66,7 @@ class MENU{
         uint16_t _menu_color_ink;
         uint16_t _menu_color_paper;
         uint16_t _menu_color_select_paper;
-        Files_Struct *Files_table = (Files_Struct*)ps_malloc(MENU_LINES_NUMBER * sizeof(Files_Struct));
-        //Files_Struct Files_table[MENU_LINES_NUMBER];
+        
         
 };
 

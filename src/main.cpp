@@ -103,10 +103,10 @@ Serial.print("Chip ID: "); Serial.println(chipId);
   
 //test_message.~MESSAGE_LINE();
 
-
-
-
+Files_Struct *Files_table = (Files_Struct*)ps_malloc(MENU_LINES_NUMBER * sizeof(Files_Struct));
 Position_Struct* Current_position = (Position_Struct*)malloc(sizeof(Position_Struct));
+
+
 
 //struct Position_Struct *P_Current_position;
 //CP_pointer = &Current_position;
@@ -120,9 +120,9 @@ Serial.println(Current_position->patf_stack[33]);
 Serial.printf("%d \n", test1);
 Serial.printf("%d \n", test2);
 
-strcat(Current_position->patf, "Elite");
-strcat(Current_position->patf, ".");
-strcat(Current_position->patf, "TAP");
+strcat(Current_position->patf, "128kB Games");
+strcat(Current_position->patf, "    ");
+strcat(Current_position->patf, ">");
 Serial.println(Current_position->patf);
 Serial.printf(Current_position->patf);
 
@@ -133,16 +133,26 @@ Serial.println();
 Serial.println(Current_position->str);
 Serial.println(Str);
 
-MESSAGE_LINE test_message(0, 0, 16, 17, ZX_WHITE_BR, ZX_BLACK, SYMBOLS);
-MESSAGE_LINE test_message2(1, 0, 16, 17, ZX_BLACK, ZX_WHITE_BR, SYMBOLS);
-MESSAGE_LINE test_message3(2, 0, 16, 17, ZX_BLACK, ZX_CYAN_BR, SYMBOLS);
-MESSAGE_LINE test_message4(3, 0, 16, 17, ZX_BLACK, ZX_WHITE_BR, SYMBOLS);
+MESSAGE_LINE test_message0(0, 0, 16, 17, ZX_WHITE_BR, ZX_BLACK, SYMBOLS);
+MESSAGE_LINE test_message1(1, 0, 16, 17, ZX_BLACK, ZX_WHITE_BR, SYMBOLS);
+MESSAGE_LINE test_message2(2, 0, 16, 17, ZX_BLACK, ZX_WHITE_BR, SYMBOLS);
+MESSAGE_LINE test_message3(3, 0, 16, 17, ZX_BLACK, ZX_CYAN_BR, SYMBOLS);
+MESSAGE_LINE test_message4(4, 0, 16, 17, ZX_BLACK, ZX_WHITE_BR, SYMBOLS);
+MESSAGE_LINE test_message21(21, 0, 16, 17, ZX_BLACK, ZX_WHITE, SYMBOLS);
 
-test_message.Show_text((char*)"SD Card:");
+test_message0.Show_text ((char*)"ZX Player");
+test_message1.Show_text ((char*)"..           1/1");
 test_message2.Show_text((char*)Current_position->patf);
-test_message3.Show_text((char*)"Exolon.TZX");
+test_message3.Show_text((char*)"Exolon.tap");
 test_message4.Show_const_message(1);
-    
+test_message21.Show_text ((char*)"SD:\\Games\\");
+
+LCD_Putchar( 255 , 8*11, 0, ZX_RED_BR, ZX_BLACK, 1, 1, 0);
+LCD_Putchar( 255 , 8*12, 0, ZX_YELLOW_BR, ZX_RED_BR, 1, 1, 0);
+LCD_Putchar( 255 , 8*13, 0, ZX_GREEN_BR, ZX_YELLOW_BR, 1, 1, 0);
+LCD_Putchar( 255 , 8*14, 0, ZX_CYAN_BR, ZX_GREEN_BR, 1, 1, 0);
+LCD_Putchar( 255 , 8*15, 0, ZX_BLACK, ZX_CYAN_BR, 1, 1, 0);
+
     Serial.println("----3----");
     Serial.printf("Total heap : %dB\n", ESP.getHeapSize());
     Serial.printf("Free heap  : %dB\n", ESP.getFreeHeap());
@@ -155,3 +165,4 @@ void loop() {
 
 
 }
+
