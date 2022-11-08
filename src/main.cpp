@@ -120,9 +120,9 @@ Serial.println(Current_position->patf_stack[33]);
 Serial.printf("%d \n", test1);
 Serial.printf("%d \n", test2);
 
-strcat(Current_position->patf, "12345");
-strcat(Current_position->patf, "67890");
-strcat(Current_position->patf, "ABCDEFGHIJ");
+strcat(Current_position->patf, "Elite");
+strcat(Current_position->patf, ".");
+strcat(Current_position->patf, "TAP");
 Serial.println(Current_position->patf);
 Serial.printf(Current_position->patf);
 
@@ -133,14 +133,14 @@ Serial.println();
 Serial.println(Current_position->str);
 Serial.println(Str);
 
-MESSAGE_LINE test_message(0, 0, 16, 17, ZX_CYAN_BR, BLACK, SYMBOLS_BOLD);
-MESSAGE_LINE test_message2(1, 0, 16, 17, ZX_GREEN_BR, BLACK, SYMBOLS_BOLD);
-MESSAGE_LINE test_message3(2, 0, 16, 17, ZX_YELLOW_BR, BLACK, SYMBOLS_BOLD);
-MESSAGE_LINE test_message4(3, 0, 16, 17, ZX_BLUE_BR, BLACK, SYMBOLS_BOLD);
+MESSAGE_LINE test_message(0, 0, 16, 17, ZX_WHITE_BR, ZX_BLACK, SYMBOLS);
+MESSAGE_LINE test_message2(1, 0, 16, 17, ZX_BLACK, ZX_WHITE_BR, SYMBOLS);
+MESSAGE_LINE test_message3(2, 0, 16, 17, ZX_BLACK, ZX_CYAN_BR, SYMBOLS);
+MESSAGE_LINE test_message4(3, 0, 16, 17, ZX_BLACK, ZX_WHITE_BR, SYMBOLS);
 
-test_message.Show_text((char*)"1234567890");
+test_message.Show_text((char*)"SD Card:");
 test_message2.Show_text((char*)Current_position->patf);
-test_message3.Show_text((char*)"1234567890123456");
+test_message3.Show_text((char*)"Exolon.TZX");
 test_message4.Show_const_message(1);
     
     Serial.println("----3----");

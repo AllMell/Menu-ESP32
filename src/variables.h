@@ -4,7 +4,7 @@ uint8_t mode;
 
 char buffer[17];//for messages
 const char str_0[] = "                 "; // 16 spaces
-const char str_1[] = "123456789012345";
+const char str_1[] = "River Raid.TAP";
 const char str_2[] = "RESTART";
 const char str_3[] = "DELETE OBJ";
 const char str_4[] = "";
