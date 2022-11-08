@@ -54,39 +54,104 @@ void setup(){
     LCD_Puts_Shadow((char*)"Русский язык", 0, 16, GREEN, 0, 0, 0);
     Serial.printf("Total space: %lluMB\n", SD_MMC.totalBytes() / (1024 * 1024));
     Serial.printf("Used space: %lluMB\n", SD_MMC.usedBytes() / (1024 * 1024));
-    delay(2000);
+    //delay(2000);
     LCD_FillScreen(ZX_WHITE);
     mode = MODE_MENU;
 
-    Serial.println("begin");
+    Serial.println("----0----");
     Serial.printf("Total heap : %dB\n", ESP.getHeapSize());
     Serial.printf("Free heap  : %dB\n", ESP.getFreeHeap());
     Serial.printf("Total PSRAM: %dB\n", ESP.getPsramSize());
     Serial.printf("Free PSRAM : %dB\n", ESP.getFreePsram());
 
 
-    
-    Position_Struct *Current_position = (Position_Struct*)ps_malloc(sizeof(Position_Struct));
-    
+MENU Menu1;
 
-    Serial.println("begin");
+    Serial.println("----1----");
     Serial.printf("Total heap : %dB\n", ESP.getHeapSize());
     Serial.printf("Free heap  : %dB\n", ESP.getFreeHeap());
     Serial.printf("Total PSRAM: %dB\n", ESP.getPsramSize());
     Serial.printf("Free PSRAM : %dB\n", ESP.getFreePsram());
 
+MENU *Menu2 = (MENU*)ps_malloc(sizeof(MENU));
+
+    Serial.println("----2----");
+    Serial.printf("Total heap : %dB\n", ESP.getHeapSize());
+    Serial.printf("Free heap  : %dB\n", ESP.getFreeHeap());
+    Serial.printf("Total PSRAM: %dB\n", ESP.getPsramSize());
+    Serial.printf("Free PSRAM : %dB\n", ESP.getFreePsram());
+
+
+
+//test_message.Show_const_message(1);
+
+//test_message.Hide();
+
+
+char str[10];
+Serial.print("Files_table size: "); Serial.println(ultoa(MENU_LINES_NUMBER * sizeof(Files_Struct),str,10));
+
+uint32_t chipId = 0;
+
+for(int i=0; i<17; i=i+8) {
+	chipId |= ((ESP.getEfuseMac() >> (40 - i)) & 0xff) << i;
+}
+
+Serial.printf("ESP32 Chip model = %s Rev %d\n", ESP.getChipModel(), ESP.getChipRevision());
+Serial.printf("This chip has %d cores\n", ESP.getChipCores());
+Serial.print("Chip ID: "); Serial.println(chipId);
+  
+//test_message.~MESSAGE_LINE();
+
+
+
+
+Position_Struct* Current_position = (Position_Struct*)malloc(sizeof(Position_Struct));
+
+//struct Position_Struct *P_Current_position;
+//CP_pointer = &Current_position;
+
+Current_position->patf_stack[5] = 10;
+Current_position->patf_stack[33] = 119;
+uint8_t test1 = Current_position->patf_stack[5];
+uint8_t test2 = Current_position->patf_stack[33];
+Serial.println(Current_position->patf_stack[5]);
+Serial.println(Current_position->patf_stack[33]);
+Serial.printf("%d \n", test1);
+Serial.printf("%d \n", test2);
+
+strcat(Current_position->patf, "12345");
+strcat(Current_position->patf, "67890");
+strcat(Current_position->patf, "ABCDEFGHIJ");
+Serial.println(Current_position->patf);
+Serial.printf(Current_position->patf);
+
+String Str = Current_position->str;
+Current_position->str = Current_position->str + "AAAAA";
+Current_position->str = Current_position->str + "BBBBB";
+Serial.println();
+Serial.println(Current_position->str);
+Serial.println(Str);
+
+MESSAGE_LINE test_message(0, 0, 16, 17, ZX_CYAN_BR, BLACK, SYMBOLS_BOLD);
+MESSAGE_LINE test_message2(1, 0, 16, 17, ZX_GREEN_BR, BLACK, SYMBOLS_BOLD);
+MESSAGE_LINE test_message3(2, 0, 16, 17, ZX_YELLOW_BR, BLACK, SYMBOLS_BOLD);
+MESSAGE_LINE test_message4(3, 0, 16, 17, ZX_BLUE_BR, BLACK, SYMBOLS_BOLD);
+
+test_message.Show_text((char*)"1234567890");
+test_message2.Show_text((char*)Current_position->patf);
+test_message3.Show_text((char*)"1234567890123456");
+test_message4.Show_const_message(1);
     
-MESSAGE_LINE test_message(1, 0, 5, GREEN, BLACK, SYMBOLS_BOLD);
-test_message.Show_const_message(1);
-delay(2000);
-test_message.Hide();
-delay(2000);
-//test_message.MESSAGE_LINE::~MESSAGE_LINE();
-test_message.~MESSAGE_LINE();
-
-
+    Serial.println("----3----");
+    Serial.printf("Total heap : %dB\n", ESP.getHeapSize());
+    Serial.printf("Free heap  : %dB\n", ESP.getFreeHeap());
+    Serial.printf("Total PSRAM: %dB\n", ESP.getPsramSize());
+    Serial.printf("Free PSRAM : %dB\n", ESP.getFreePsram());
 }
 
 void loop() {
+
+
 
 }

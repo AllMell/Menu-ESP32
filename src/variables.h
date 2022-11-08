@@ -1,11 +1,10 @@
 #pragma once
 
 uint8_t mode;
-char file_name[16][22][2];
 
-char buffer[16];//for messages
-const char str_0[] = "                "; // 16 spaces
-const char str_1[] = "HELLOW!!!       ";
+char buffer[17];//for messages
+const char str_0[] = "                 "; // 16 spaces
+const char str_1[] = "123456789012345";
 const char str_2[] = "RESTART";
 const char str_3[] = "DELETE OBJ";
 const char str_4[] = "";
@@ -28,12 +27,22 @@ struct Files_Struct{
 };
 
 struct Position_Struct{
-    uint8_t position_in_dir;
-    uint8_t position_on_page;
-    uint8_t current_page;
+    uint8_t position_in_dir = 0;
+    uint8_t position_in_dir_old =1;
+    uint8_t position_on_page = 0;
+    uint8_t position_on_page_old = 1;
+    uint8_t current_page = 0;
+    uint8_t current_page_old = 1;
+    uint16_t patf_stack_point = 0;
     uint16_t patf_stack[64];
-    char patf[1024];
+    char patf[30] = "Hellow";
+    String str = "QWERTY";
 };
 
 
+
+
+
+//Position_Struct* CP_pointer = &Current_position;
+//Position_Struct Current_position;
 
