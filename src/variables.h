@@ -39,7 +39,11 @@ struct Position_Struct{
     String str = "QWERTY";
 };
 
-
+const uint16_t logo[5][2]= {{ZX_BLACK, ZX_RED_BR},
+                            {ZX_RED_BR, ZX_YELLOW_BR},
+                            {ZX_YELLOW_BR, ZX_GREEN_BR},
+                            {ZX_GREEN_BR, ZX_CYAN_BR},
+                            {ZX_CYAN_BR, ZX_BLACK}};
 
 
 

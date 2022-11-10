@@ -66,7 +66,7 @@ class MENU{
         uint16_t _menu_color_ink;
         uint16_t _menu_color_paper;
         uint16_t _menu_color_select_paper;
-        
+        Files_Struct *Files_table = (Files_Struct*)ps_malloc(MENU_LINES_NUMBER * sizeof(Files_Struct));
         
 };
 

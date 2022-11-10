@@ -10,12 +10,25 @@
 #include "MENU.h"
 
 void setup(){
+    esp_log_level_set("*", ESP_LOG_INFO);  
+    ESP_LOGE("TAG", "1Error");
+    ESP_LOGW("TAG", "1Warning");
+    ESP_LOGI("TAG", "1Info");
+    ESP_LOGD("TAG", "1Debug");
+    ESP_LOGV("TAG", "1Verbose");
+
+    esp_log_level_set("*", ESP_LOG_VERBOSE);  
+    ESP_LOGE("TAG", "Error");
+    ESP_LOGW("TAG", "Warning");
+    ESP_LOGI("TAG", "Info");
+    ESP_LOGD("TAG", "Debug");
+    ESP_LOGV("TAG", "Verbose");
     mode = MODE_START;
     pinMode(2, INPUT_PULLUP); //for SD CARD
     Serial.begin(115200);
     LCD_init();
     LCD_set_font(SYMBOLS);
-    LCD_FillScreen(BLACK);
+    LCD_FillScreen(ZX_WHITE);
 
     if(!SD_MMC.begin("/sdcard",true)){
         Serial.printf("SD Mount Failed");
@@ -51,10 +64,9 @@ void setup(){
     Serial.printf("\nSD_MMC Card Size: %lluMB\n", cardSize);
     LCD_Puts_Shadow((char*)"Size(Mb): ", 0, 8, GREEN, 0, 0, 0);
     LCD_Puts_Shadow(ultoa(cardSize, buffer, 10), 80, 8, GREEN, 0, 0, 0);
-    LCD_Puts_Shadow((char*)"Русский язык", 0, 16, GREEN, 0, 0, 0);
     Serial.printf("Total space: %lluMB\n", SD_MMC.totalBytes() / (1024 * 1024));
     Serial.printf("Used space: %lluMB\n", SD_MMC.usedBytes() / (1024 * 1024));
-    //delay(2000);
+    delay(1000);
     LCD_FillScreen(ZX_WHITE);
     mode = MODE_MENU;
 
@@ -92,7 +104,6 @@ char str[10];
 Serial.print("Files_table size: "); Serial.println(ultoa(MENU_LINES_NUMBER * sizeof(Files_Struct),str,10));
 
 uint32_t chipId = 0;
-
 for(int i=0; i<17; i=i+8) {
 	chipId |= ((ESP.getEfuseMac() >> (40 - i)) & 0xff) << i;
 }
@@ -101,9 +112,9 @@ Serial.printf("ESP32 Chip model = %s Rev %d\n", ESP.getChipModel(), ESP.getChipR
 Serial.printf("This chip has %d cores\n", ESP.getChipCores());
 Serial.print("Chip ID: "); Serial.println(chipId);
   
-//test_message.~MESSAGE_LINE();
 
-Files_Struct *Files_table = (Files_Struct*)ps_malloc(MENU_LINES_NUMBER * sizeof(Files_Struct));
+
+
 Position_Struct* Current_position = (Position_Struct*)malloc(sizeof(Position_Struct));
 
 
@@ -147,11 +158,10 @@ test_message3.Show_text((char*)"Exolon.tap");
 test_message4.Show_const_message(1);
 test_message21.Show_text ((char*)"SD:\\Games\\");
 
-LCD_Putchar( 255 , 8*11, 0, ZX_RED_BR, ZX_BLACK, 1, 1, 0);
-LCD_Putchar( 255 , 8*12, 0, ZX_YELLOW_BR, ZX_RED_BR, 1, 1, 0);
-LCD_Putchar( 255 , 8*13, 0, ZX_GREEN_BR, ZX_YELLOW_BR, 1, 1, 0);
-LCD_Putchar( 255 , 8*14, 0, ZX_CYAN_BR, ZX_GREEN_BR, 1, 1, 0);
-LCD_Putchar( 255 , 8*15, 0, ZX_BLACK, ZX_CYAN_BR, 1, 1, 0);
+//ZX logo
+for (int i = 0; i < 5; i++) {
+    LCD_Putchar( 255, 8*(10 +i) + 4, 0, logo[i][0], logo[i][1], 1, 1, 0);
+}
 
     Serial.println("----3----");
     Serial.printf("Total heap : %dB\n", ESP.getHeapSize());
